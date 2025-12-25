@@ -6,8 +6,9 @@ export interface Column extends Product {
 
 export interface CreateProductParams {
   title: string;
-  price: number;
   description: string;
-  categoryId: number;
+  category: string;
+  price: number;
+  discountPercentage: number;
   images: string[];
 }

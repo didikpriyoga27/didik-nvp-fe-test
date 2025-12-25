@@ -25,7 +25,7 @@ const useQueryCategoriesHook = () => {
     return response.data;
   }, [baseUrl]);
 
-  const { data: categoriesData } = useQuery<string[]>({
+  const { data: categoriesData, isLoading } = useQuery<string[]>({
     queryKey: ["categories"],
     queryFn: fetchCategories,
     placeholderData: keepPreviousData,
@@ -39,6 +39,7 @@ const useQueryCategoriesHook = () => {
 
   return {
     categoryOptions,
+    isLoading,
   };
 };
 

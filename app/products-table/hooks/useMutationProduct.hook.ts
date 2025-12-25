@@ -1,7 +1,8 @@
+import { Product } from "@/components/sections/product-grid";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useCallback } from "react";
-import { CreateProductParams, Product } from "../type";
+import { CreateProductParams } from "../type";
 
 /**
  * A hook for creating and deleting products.
@@ -24,7 +25,7 @@ const useMutationProductHook = () => {
 
   const createProduct = useCallback(
     async (data: CreateProductParams) =>
-      axios.post<CreateProductParams>(`${baseUrl}/products`, data),
+      axios.post<CreateProductParams>(`${baseUrl}/products/add`, data),
     [baseUrl]
   );
 

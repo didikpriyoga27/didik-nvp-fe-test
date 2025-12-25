@@ -63,7 +63,7 @@ const ProductDetailPage = () => {
               <p className="text-muted-foreground">
                 {`The product you're looking for doesn't exist or has been removed.`}
               </p>
-              <Button onClick={() => router.push("/products")}>
+              <Button onClick={() => router.push("/products-table")}>
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back to Products
               </Button>
@@ -82,6 +82,7 @@ const ProductDetailPage = () => {
     // dummy function to show react toastify
     successMessage(product.title + " added to cart successfully");
   };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -108,8 +109,10 @@ const ProductDetailPage = () => {
                 src={images[selectedImage] || product.thumbnail}
                 alt={product.title}
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
                 priority
+                loading="eager"
               />
               {product.discountPercentage > 0 && (
                 <Badge className="absolute top-4 left-4 bg-red-500">
@@ -135,7 +138,9 @@ const ProductDetailPage = () => {
                       src={image}
                       alt={`${product.title} - Image ${index + 1}`}
                       fill
+                      sizes="(max-width: 1024px) 25vw, 12.5vw"
                       className="object-cover"
+                      loading="eager"
                     />
                   </button>
                 ))}

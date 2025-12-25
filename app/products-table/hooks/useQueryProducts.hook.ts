@@ -82,7 +82,6 @@ const useQueryProductsHook = (isPaginated = true) => {
     const finalUrl = `${url}${separator}${params.toString()}`;
 
     const response = await axios.get(finalUrl);
-    console.log({ isPaginated, limit, finalUrl, response });
     return response.data;
   }, [baseUrl, search, category, isPaginated, sortBy, limit, skip, order]);
 

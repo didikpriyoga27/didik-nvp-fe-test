@@ -1,3 +1,2 @@
-import productSchema from "./product.schema";
-
-export { productSchema };
+export { default as product } from "./product.schema";
+export type { ProductFormData } from "./product.schema";
