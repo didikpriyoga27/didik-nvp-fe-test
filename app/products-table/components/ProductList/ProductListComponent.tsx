@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
   Table,
@@ -11,7 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { formatCategory } from "@/lib/utils";
-import { Loader2, ShoppingCart } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { JSX, useCallback, useMemo } from "react";
@@ -146,18 +145,6 @@ const ProductListComponent = (): JSX.Element => {
             <TableCell>
               <div className="flex items-center justify-center gap-2 px-4">
                 <ProductModal mode="edit" selectedProduct={product} />
-
-                <Button
-                  variant="default"
-                  size="icon"
-                  className="h-9 w-9 bg-green-600 hover:bg-green-700"
-                  aria-label="Add to cart"
-                  onClick={() => {
-                    console.log("Add to cart:", product.id);
-                  }}
-                >
-                  <ShoppingCart className="h-4 w-4" />
-                </Button>
 
                 <DeleteProductModal
                   productId={product.id}

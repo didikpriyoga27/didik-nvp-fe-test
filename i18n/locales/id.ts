@@ -1,11 +1,4 @@
-import { TCartKeys, TCommonsKeys, TProductsKeys } from "../type";
-
-const cart: Record<TCartKeys, string> = {
-  empty: "Keranjang anda kosong",
-  goToProducts: "Pergi ke Produk",
-  successPurchase:
-    "Pembelian Anda telah selesai. Kami akan mengirimkan detail pembelian melalui email.",
-};
+import { TCommonsKeys, TProductsKeys } from "../type";
 
 const commons: Record<TCommonsKeys, string> = {
   cart: "Keranjang",
@@ -37,7 +30,6 @@ const products: Record<TProductsKeys, string> = {
 };
 
 const id = {
-  cart,
   commons,
   products,
 };

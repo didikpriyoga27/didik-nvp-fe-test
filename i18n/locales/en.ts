@@ -1,10 +1,3 @@
-const cart = {
-  empty: "Your cart is empty",
-  goToProducts: "Go to Products",
-  successPurchase:
-    "Your purchase has been successfully completed. We will send you an email with the details.",
-};
-
 const commons = {
   cart: "Cart",
   products: "Products",
@@ -35,7 +28,6 @@ const products = {
 };
 
 const en = {
-  cart,
   commons,
   products,
 };

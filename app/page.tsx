@@ -1,8 +1,7 @@
 "use client";
 
 import { Hero } from "@/components/sections/hero";
-import { Product, ProductGrid } from "@/components/sections/product-grid";
-import { shuffleArray } from "@/lib/utils";
+import { ProductGrid } from "@/components/sections/product-grid";
 import { Suspense } from "react";
 import useQueryProductsHook from "./products-table/hooks/useQueryProducts.hook";
 
@@ -31,17 +30,13 @@ export function ProductGridSkeleton() {
 }
 
 export default function Home() {
-  const { productsData } = useQueryProductsHook();
-
-  const randomizedProducts = [
-    ...(shuffleArray<Product>(productsData?.products) || []),
-  ];
+  const { productsData } = useQueryProductsHook(false);
 
   return (
     <main>
       <Hero />
       <Suspense fallback={<ProductGridSkeleton />}>
-        <ProductGrid products={randomizedProducts} limit={6} />
+        <ProductGrid products={productsData?.products} limit={30} />
       </Suspense>
     </main>
   );

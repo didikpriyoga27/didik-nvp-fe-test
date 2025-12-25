@@ -1,6 +1,6 @@
 "use client";
 
-import { DarkModeIcon } from "@/components/atoms/Icons";
+import { DarkMode } from "@/components/atoms/Icons";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 import { useCallback } from "react";
@@ -21,9 +21,9 @@ export function ThemeButton() {
       onClick={handleToggleTheme}
       variant="ghost"
       className="p-2 hover:bg-secondary rounded-full transition-colors relative"
-      aria-label="Shopping cart"
+      aria-label="Theme toggle"
     >
-      <DarkModeIcon className="w-6 h-6" />
+      <DarkMode className="w-6 h-6" />
     </Button>
   );
 }

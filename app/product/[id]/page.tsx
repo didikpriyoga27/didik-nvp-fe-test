@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import useToastHook from "@/hooks/useToast.hook";
+import { formatCategory } from "@/lib/utils";
 import {
   ArrowLeft,
   Loader2,
@@ -38,6 +40,7 @@ const ProductDetailPage = () => {
   const { product, isLoading, error } = useQueryProductDetailHook(productId);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const { successMessage } = useToastHook();
 
   if (isLoading) {
     return (
@@ -75,6 +78,10 @@ const ProductDetailPage = () => {
   const discountedPrice =
     product.price * (1 - product.discountPercentage / 100);
 
+  const handleAddToCart = () => {
+    // dummy function to show react toastify
+    successMessage(product.title + " added to cart successfully");
+  };
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -141,7 +148,7 @@ const ProductDetailPage = () => {
             {/* Title and Category */}
             <div>
               <Badge variant="secondary" className="mb-2">
-                {product.category}
+                {formatCategory(product.category)}
               </Badge>
               <h1 className="text-3xl sm:text-4xl font-bold text-foreground">
                 {product.title}
@@ -240,6 +247,7 @@ const ProductDetailPage = () => {
                 size="lg"
                 className="w-full"
                 disabled={product.stock === 0}
+                onClick={handleAddToCart}
               >
                 <ShoppingCart className="h-5 w-5 mr-2" />
                 Add to Cart

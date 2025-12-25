@@ -24,7 +24,7 @@ import { useCallback } from "react";
  *
  * @returns {Object} An object with the properties as described above.
  */
-const useQueryProductsHook = () => {
+const useQueryProductsHook = (isPaginated = true) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -64,10 +64,12 @@ const useQueryProductsHook = () => {
       url = `${baseUrl}/products/category/${encodeURIComponent(category)}`;
     }
 
-    // Add pagination
     const params = new URLSearchParams();
-    params.set("limit", limit.toString());
-    params.set("skip", skip.toString());
+    if (isPaginated) {
+      // Add pagination
+      params.set("limit", limit.toString());
+      params.set("skip", skip.toString());
+    }
 
     // Add sorting
     if (sortBy) {
@@ -80,8 +82,9 @@ const useQueryProductsHook = () => {
     const finalUrl = `${url}${separator}${params.toString()}`;
 
     const response = await axios.get(finalUrl);
+    console.log({ isPaginated, limit, finalUrl, response });
     return response.data;
-  }, [baseUrl, search, category, sortBy, limit, skip, order]);
+  }, [baseUrl, search, category, isPaginated, sortBy, limit, skip, order]);
 
   const {
     data: productsData,
@@ -89,7 +92,16 @@ const useQueryProductsHook = () => {
     isLoading,
     isRefetching,
   } = useQuery<{ products: Product[]; total: number; limit: number }>({
-    queryKey: ["products", page, limit, search, category, sortBy, order],
+    queryKey: [
+      "products",
+      isPaginated,
+      page,
+      limit,
+      search,
+      category,
+      sortBy,
+      order,
+    ],
     queryFn: fetchProducts,
     placeholderData: keepPreviousData,
   });

@@ -11,15 +11,3 @@ export function formatCategory(category: string) {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 }
-
-export function shuffleArray<T>(array: T[] | undefined) {
-  if (array && array.length > 2) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
-    }
-  }
-  return array;
-}
