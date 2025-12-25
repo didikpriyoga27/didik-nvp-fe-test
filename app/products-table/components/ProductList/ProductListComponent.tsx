@@ -17,6 +17,7 @@ import useQueryProductsHook from "../../hooks/useQueryProducts.hook";
 import { DeleteProductModal } from "../../modals/DeleteProductModal";
 import { ProductModal } from "../../modals/ProductModal";
 import { ProductPagination } from "../ProductPagination";
+import ProductFilters from "./components/ProductFilters";
 
 /**
  * A component that renders a table with a list of products.
@@ -55,7 +56,7 @@ const ProductListComponent = (): JSX.Element => {
       return (
         <TableBody>
           <TableRow>
-            <TableCell colSpan={8} className="text-center py-12">
+            <TableCell colSpan={12} className="text-center py-12">
               <div className="flex flex-col items-center gap-2">
                 <span className="text-lg text-muted-foreground">
                   No products found
@@ -100,11 +101,14 @@ const ProductListComponent = (): JSX.Element => {
             </TableCell>
             <TableCell className="text-foreground">
               <div
-                className="text-sm overflow-hidden text-ellipsis max-w-80"
+                className="text-sm overflow-hidden text-ellipsis max-w-60"
                 title={product.description}
               >
                 {product.description}
               </div>
+            </TableCell>
+            <TableCell className="text-center text-foreground">
+              {product.category}
             </TableCell>
             <TableCell className="text-center font-semibold text-foreground">
               ${product.price.toFixed(2)}
@@ -122,7 +126,7 @@ const ProductListComponent = (): JSX.Element => {
               </div>
             </TableCell>
             <TableCell>
-              <div className="flex items-center justify-center gap-2">
+              <div className="flex items-center justify-center gap-2 px-4">
                 <ProductModal mode="edit" selectedProduct={product} />
 
                 <Button
@@ -156,6 +160,9 @@ const ProductListComponent = (): JSX.Element => {
         <ProductModal mode="create" />
       </div>
 
+      {/* Search, Sort, and Filter Controls */}
+      <ProductFilters />
+
       <Card className="overflow-hidden shadow-lg py-0 rounded-sm">
         <div className="overflow-x-auto">
           <Table className="w-full">
@@ -170,8 +177,11 @@ const ProductListComponent = (): JSX.Element => {
                 <TableHead className="text-center font-semibold w-40">
                   Title
                 </TableHead>
-                <TableHead className="text-center font-semibold w-80">
+                <TableHead className="text-center font-semibold w-60">
                   Description
+                </TableHead>
+                <TableHead className="text-center font-semibold w-40">
+                  Category
                 </TableHead>
                 <TableHead className="text-center font-semibold w-32">
                   Price
@@ -182,7 +192,7 @@ const ProductListComponent = (): JSX.Element => {
                 <TableHead className="text-center font-semibold w-40">
                   Updated at
                 </TableHead>
-                <TableHead className="text-center font-semibold w-44">
+                <TableHead className="text-center font-semibold w-60">
                   Actions
                 </TableHead>
               </TableRow>

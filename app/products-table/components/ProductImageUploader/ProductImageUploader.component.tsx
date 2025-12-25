@@ -93,7 +93,7 @@ const ProductImageUploaderComponent = ({
       {previewImage && (
         <img
           src={previewImage}
-          alt="preview image"
+          alt="preview"
           className="w-24 h-24 object-cover rounded-md mt-2"
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;

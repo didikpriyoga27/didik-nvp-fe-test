@@ -2,7 +2,6 @@ import { Option } from "@/components/atoms/Select/type";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useCallback } from "react";
-import { Category } from "../type";
 
 /**
  * A hook for fetching the list of categories with pagination support.
@@ -21,11 +20,11 @@ const useQueryCategoriesHook = () => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   const fetchCategories = useCallback(async () => {
-    const response = await axios.get(`${baseUrl}/products/categories`);
+    const response = await axios.get(`${baseUrl}/products/category-list`);
     return response.data;
   }, [baseUrl]);
 
-  const { data: categoriesData } = useQuery<Category[]>({
+  const { data: categoriesData } = useQuery<string[]>({
     queryKey: ["categories"],
     queryFn: fetchCategories,
     placeholderData: keepPreviousData,
@@ -33,8 +32,8 @@ const useQueryCategoriesHook = () => {
 
   const categoryOptions: Option[] =
     categoriesData?.map((category) => ({
-      value: String(category.slug),
-      label: category.name,
+      value: category,
+      label: category,
     })) ?? [];
 
   return {

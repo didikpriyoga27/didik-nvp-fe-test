@@ -141,7 +141,7 @@ const ProductModal = ({
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         {mode === "create" ? (
-          <Button className="bg-green-600 hover:bg-green-700">
+          <Button>
             <Plus className="h-4 w-4 mr-2" />
             Add Product
           </Button>

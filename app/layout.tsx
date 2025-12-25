@@ -13,6 +13,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { PropsWithChildren, Suspense } from "react";
+import { ThemeButton } from "./theme-button";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -69,7 +70,10 @@ async function CartProviderWrapper({ children }: Readonly<PropsWithChildren>) {
                 <Navbar />
               </div>
               <Suspense fallback={<CartButtonFallback />}>
-                <CartButton />
+                <div className="justify-end flex-row gap-4">
+                  <ThemeButton />
+                  <CartButton />
+                </div>
               </Suspense>
             </div>
           </div>
