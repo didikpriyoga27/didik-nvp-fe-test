@@ -10,8 +10,10 @@ export interface Product {
   price: number;
   description: string;
   images: string[];
-  creationAt: string;
-  updatedAt: string;
+  meta: {
+    createdAt: string;
+    updatedAt: string;
+  };
 }
 
 export interface Column extends Product {

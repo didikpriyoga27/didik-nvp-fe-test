@@ -61,7 +61,7 @@ const useQueryProductsHook = () => {
     refetch,
     isLoading,
     isRefetching,
-  } = useQuery<{ products: Product[] }>({
+  } = useQuery<{ products: Product[]; total: number; limit: number }>({
     queryKey: ["products", page, limit, search],
     queryFn: fetchProducts,
     placeholderData: keepPreviousData,
