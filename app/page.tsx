@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { Hero } from "@/components/sections/hero";
 import { ProductGrid } from "@/components/sections/product-grid";
 
-function ProductGridSkeleton() {
+export function ProductGridSkeleton() {
 	return (
 		<section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
 			<div className="flex items-end justify-between mb-12">

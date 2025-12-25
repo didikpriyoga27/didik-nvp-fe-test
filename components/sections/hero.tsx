@@ -15,15 +15,16 @@ export function Hero() {
 						</p>
 						<div className="mt-10 flex flex-col sm:flex-row gap-4">
 							<Link
-								href="#products"
+								href="/products-table"
 								className="inline-flex items-center justify-center gap-2 h-12 px-8 bg-foreground text-primary-foreground rounded-full text-base font-medium hover:bg-foreground/90 transition-colors"
 							>
-								Use Table View
+								Go To Table View
 								<ArrowRight className="h-4 w-4" />
 							</Link>
 							<Link
-								href="#about"
+								href="https://didikpry.vercel.app/"
 								className="inline-flex items-center justify-center gap-2 h-12 px-8 border border-border rounded-full text-base font-medium hover:bg-secondary transition-colors"
+								target="blank"
 							>
 								About Me
 							</Link>

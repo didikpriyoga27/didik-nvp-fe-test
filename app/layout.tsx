@@ -1,16 +1,18 @@
+import { CartButton } from "@/app/cart-button";
+import { Cart, CartProvider } from "@/app/cart/cart-context";
+import { CartSidebar } from "@/app/cart/cart-sidebar";
+import { Footer } from "@/app/footer";
+//@ts-expect-error valid import
+import "@/app/globals.css";
+import { Navbar } from "@/app/navbar";
+import { TanstackQueryProvider, ToastProvider } from "@/providers";
+import { ShoppingCartIcon } from "lucide-react";
 import type { Metadata } from "next";
+import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { PropsWithChildren, Suspense } from "react";
-import { Cart, CartProvider } from "@/app/cart/cart-context";
-import { CartSidebar } from "@/app/cart/cart-sidebar";
-import { CartButton } from "@/app/cart-button";
-import { Footer } from "@/app/footer";
-import { Navbar } from "@/app/navbar";
-//@ts-expect-error valid import
-import "@/app/globals.css";
-import { ShoppingCartIcon } from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -86,13 +88,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Suspense fallback={null}>
-          <CartProviderWrapper>{children}</CartProviderWrapper>
-        </Suspense>
+        <ThemeProvider attribute="class">
+          <TanstackQueryProvider>
+            <Suspense fallback={null}>
+              <ToastProvider>
+                <CartProviderWrapper>{children}</CartProviderWrapper>
+              </ToastProvider>
+            </Suspense>
+          </TanstackQueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

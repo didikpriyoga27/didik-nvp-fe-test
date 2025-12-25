@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import mockProducts from "./mock_products.json";
-import { cn } from "@/lib/utils";
 
 export type Product = {
   id: number;
@@ -50,7 +49,7 @@ type ProductGridProps = {
   description?: string;
   products?: Product[];
   limit?: number;
-  showViewAll?: boolean;
+  isAllProducts?: boolean;
   viewAllHref?: string;
 };
 
@@ -59,7 +58,7 @@ export async function ProductGrid({
   description = "Handpicked favorites from our collection",
   products,
   limit = 10,
-  showViewAll = true,
+  isAllProducts = false,
   viewAllHref = "/products",
 }: Readonly<ProductGridProps>) {
   const displayProducts = products ?? mockProducts;
@@ -76,7 +75,7 @@ export async function ProductGrid({
           </h2>
           <p className="mt-2 text-muted-foreground">{description}</p>
         </div>
-        {showViewAll && (
+        {!isAllProducts && (
           <Link
             href={viewAllHref}
             className="hidden sm:inline-flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
@@ -122,7 +121,7 @@ export async function ProductGrid({
         })}
       </div>
 
-      {showViewAll && (
+      {!isAllProducts && (
         <div className="mt-12 text-center sm:hidden">
           <Link
             href={viewAllHref}
