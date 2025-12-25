@@ -80,21 +80,29 @@ const ProductListComponent = (): JSX.Element => {
               #{product.id}
             </TableCell>
             <TableCell className="text-center">
-              <div className="flex justify-center">
+              <div className="w-30 justify-center">
                 <Image
                   src={product.images?.[0] || "/placeholder.png"}
                   alt={product.title}
                   className="object-cover rounded-md"
-                  width={400}
-                  height={400}
+                  width={120}
+                  height={120}
                 />
               </div>
             </TableCell>
-            <TableCell className="text-center text-foreground">
-              {product.title}
+            <TableCell className="text-foreground">
+              <div
+                className="text-sm overflow-hidden text-ellipsis max-w-40"
+                title={product.title}
+              >
+                {product.title}
+              </div>
             </TableCell>
             <TableCell className="text-foreground">
-              <div className="line-clamp-3 text-sm" title={product.description}>
+              <div
+                className="text-sm overflow-hidden text-ellipsis max-w-80"
+                title={product.description}
+              >
                 {product.description}
               </div>
             </TableCell>
@@ -142,39 +150,39 @@ const ProductListComponent = (): JSX.Element => {
   }, [isShowLoading, products]);
 
   return (
-    <section className="w-full max-w-[95%] mx-auto px-4 py-6">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-foreground">Products</h1>
         <ProductModal mode="create" />
       </div>
 
-      <Card className="overflow-hidden shadow-lg">
+      <Card className="overflow-hidden shadow-lg py-0 rounded-sm">
         <div className="overflow-x-auto">
           <Table className="w-full">
             <TableHeader>
               <TableRow>
-                <TableHead className="text-center font-semibold w-[80px]">
+                <TableHead className="text-center font-semibold w-20">
                   Product ID
                 </TableHead>
-                <TableHead className="text-center font-semibold w-[120px]">
+                <TableHead className="text-center font-semibold w-40">
                   Image
                 </TableHead>
-                <TableHead className="text-center font-semibold w-[200px]">
+                <TableHead className="text-center font-semibold w-40">
                   Title
                 </TableHead>
-                <TableHead className="text-center font-semibold w-[350px]">
+                <TableHead className="text-center font-semibold w-80">
                   Description
                 </TableHead>
-                <TableHead className="text-center font-semibold w-[120px]">
+                <TableHead className="text-center font-semibold w-32">
                   Price
                 </TableHead>
-                <TableHead className="text-center font-semibold w-[150px]">
+                <TableHead className="text-center font-semibold w-40">
                   Created at
                 </TableHead>
-                <TableHead className="text-center font-semibold w-[150px]">
+                <TableHead className="text-center font-semibold w-40">
                   Updated at
                 </TableHead>
-                <TableHead className="text-center font-semibold w-[180px]">
+                <TableHead className="text-center font-semibold w-44">
                   Actions
                 </TableHead>
               </TableRow>
