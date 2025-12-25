@@ -1,4 +1,5 @@
 import { Option } from "@/components/atoms/Select/type";
+import { formatCategory } from "@/lib/utils";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useCallback } from "react";
@@ -33,7 +34,7 @@ const useQueryCategoriesHook = () => {
   const categoryOptions: Option[] =
     categoriesData?.map((category) => ({
       value: category,
-      label: category,
+      label: formatCategory(category),
     })) ?? [];
 
   return {

@@ -1,3 +1,4 @@
+import { Product } from "@/components/sections/product-grid";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -21,7 +22,7 @@ import ProductImageUploaderComponent from "../../components/ProductImageUploader
 import useMutationProductHook from "../../hooks/useMutationProduct.hook";
 import useQueryProductsHook from "../../hooks/useQueryProducts.hook";
 import { productSchema } from "../../schemas";
-import { CreateProductParams, Product } from "../../type";
+import { CreateProductParams } from "../../type";
 
 interface IProductModalProps {
   selectedProduct?: Product;

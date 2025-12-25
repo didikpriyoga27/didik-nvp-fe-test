@@ -1,15 +1,4 @@
-export interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  images: string[];
-  meta: {
-    createdAt: string;
-    updatedAt: string;
-  };
-}
+import { Product } from "@/components/sections/product-grid";
 
 export interface Column extends Product {
   actions?: string;

@@ -1,9 +1,11 @@
+"use client";
+
+import { Product } from "@/components/sections/product-grid";
 import useQueryStringHook from "@/hooks/useQueryString.hook";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
-import { Product } from "../type";
 
 /**
  * A hook for fetching the list of products with search, sort, and filter capabilities.
@@ -79,7 +81,7 @@ const useQueryProductsHook = () => {
 
     const response = await axios.get(finalUrl);
     return response.data;
-  }, [baseUrl, limit, skip, search, category, sortBy, order]);
+  }, [baseUrl, search, category, sortBy, limit, skip, order]);
 
   const {
     data: productsData,

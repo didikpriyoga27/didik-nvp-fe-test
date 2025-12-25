@@ -1,8 +1,5 @@
-import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-
-import mockProducts from "./mock_products.json";
 
 export type Product = {
   id: number;
@@ -49,20 +46,14 @@ type ProductGridProps = {
   description?: string;
   products?: Product[];
   limit?: number;
-  isAllProducts?: boolean;
-  viewAllHref?: string;
 };
 
-export async function ProductGrid({
+export function ProductGrid({
   title = "Featured Products",
   description = "Handpicked favorites from our collection",
-  products,
-  limit = 10,
-  isAllProducts = false,
-  viewAllHref = "/products",
+  products = [],
+  limit = 6,
 }: Readonly<ProductGridProps>) {
-  const displayProducts = products ?? mockProducts;
-
   return (
     <section
       id="products"
@@ -75,21 +66,16 @@ export async function ProductGrid({
           </h2>
           <p className="mt-2 text-muted-foreground">{description}</p>
         </div>
-        {!isAllProducts && (
-          <Link
-            href={viewAllHref}
-            className="hidden sm:inline-flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            View all
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        )}
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {displayProducts.slice(0, limit).map((product) => {
+        {products.slice(0, limit).map((product) => {
           const allImages = [...(product.images ?? [])];
-          const primaryImage = allImages[0];
+          const primaryImage = allImages[0] || product.thumbnail;
+          const discountedPrice =
+            product.discountPercentage > 0
+              ? product.price * (1 - product.discountPercentage / 100)
+              : product.price;
 
           return (
             <Link
@@ -104,34 +90,51 @@ export async function ProductGrid({
                     alt={product.title}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover group-hover:scale-120 transition duration-500"
+                    className="object-cover group-hover:scale-110 transition duration-500"
                   />
                 )}
+                {product.discountPercentage > 0 && (
+                  <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-md">
+                    -{product.discountPercentage.toFixed(0)}% OFF
+                  </div>
+                )}
+                {product.stock === 0 && (
+                  <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                    <span className="text-white font-semibold text-lg">
+                      Out of Stock
+                    </span>
+                  </div>
+                )}
               </div>
-              <div className="space-y-1">
-                <h3 className="text-base font-medium text-foreground">
-                  {product.title}
-                </h3>
-                <p className="text-base font-semibold text-foreground">
-                  {product.price}
-                </p>
+              <div className="space-y-2">
+                <div className="flex items-start justify-between gap-2">
+                  <h3 className="text-base font-medium text-foreground line-clamp-2 flex-1">
+                    {product.title}
+                  </h3>
+                  {product.rating && (
+                    <div className="flex items-center gap-1 text-sm shrink-0">
+                      <span className="text-yellow-500">★</span>
+                      <span className="text-foreground font-medium">
+                        {product.rating.toFixed(1)}
+                      </span>
+                    </div>
+                  )}
+                </div>
+                <div className="flex items-baseline gap-2">
+                  <p className="text-lg font-semibold text-foreground">
+                    ${discountedPrice.toFixed(2)}
+                  </p>
+                  {product.discountPercentage > 0 && (
+                    <p className="text-sm text-muted-foreground line-through">
+                      ${product.price.toFixed(2)}
+                    </p>
+                  )}
+                </div>
               </div>
             </Link>
           );
         })}
       </div>
-
-      {!isAllProducts && (
-        <div className="mt-12 text-center sm:hidden">
-          <Link
-            href={viewAllHref}
-            className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            View all products
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      )}
     </section>
   );
 }

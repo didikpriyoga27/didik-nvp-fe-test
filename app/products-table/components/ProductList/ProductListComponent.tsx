@@ -10,8 +10,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { formatCategory } from "@/lib/utils";
 import { Loader2, ShoppingCart } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { JSX, useCallback, useMemo } from "react";
 import useQueryProductsHook from "../../hooks/useQueryProducts.hook";
 import { DeleteProductModal } from "../../modals/DeleteProductModal";
@@ -40,7 +42,7 @@ const ProductListComponent = (): JSX.Element => {
       return (
         <TableBody>
           <TableRow>
-            <TableCell colSpan={8} className="text-center py-12">
+            <TableCell colSpan={12} className="text-center py-12">
               <div className="flex items-center justify-center gap-2">
                 <Loader2 className="h-5 w-5 animate-spin" />
                 <span className="text-muted-foreground">
@@ -81,15 +83,18 @@ const ProductListComponent = (): JSX.Element => {
               #{product.id}
             </TableCell>
             <TableCell className="text-center">
-              <div className="w-30 justify-center">
+              <Link
+                href={`/product/${product.id}`}
+                className="w-40 justify-center"
+              >
                 <Image
                   src={product.images?.[0] || "/placeholder.png"}
                   alt={product.title}
                   className="object-cover rounded-md"
-                  width={120}
-                  height={120}
+                  width={80}
+                  height={80}
                 />
-              </div>
+              </Link>
             </TableCell>
             <TableCell className="text-foreground">
               <div
@@ -108,10 +113,23 @@ const ProductListComponent = (): JSX.Element => {
               </div>
             </TableCell>
             <TableCell className="text-center text-foreground">
-              {product.category}
+              {formatCategory(product.category)}
             </TableCell>
             <TableCell className="text-center font-semibold text-foreground">
-              ${product.price.toFixed(2)}
+              <div>
+                $
+                {product.discountPercentage > 0
+                  ? (
+                      product.price *
+                      (1 - product.discountPercentage / 100)
+                    ).toFixed(2)
+                  : product.price.toFixed(2)}
+              </div>
+              {product.discountPercentage > 0 && (
+                <div className="text-muted-foreground line-through">
+                  ${product.price.toFixed(2)}
+                </div>
+              )}
             </TableCell>
             <TableCell className="text-center text-sm text-foreground">
               <div>{new Date(product.meta.createdAt).toLocaleDateString()}</div>
