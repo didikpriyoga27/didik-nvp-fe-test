@@ -10,6 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import useQueryStringHook from "@/hooks/useQueryString.hook";
+import useTranslationHook from "@/i18n/useTranslation.hook";
 import { ArrowUpDown, Search, X } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { JSX, useState } from "react";
@@ -26,7 +27,8 @@ import { JSX, useState } from "react";
 const ProductFilters = (): JSX.Element => {
   const router = useRouter();
   const pathname = usePathname();
-  const { getQueryString, createQueryString } = useQueryStringHook();
+  const { t } = useTranslationHook();
+  const { getQueryString } = useQueryStringHook();
   const { categoryOptions: categories } = useQueryCategoriesHook();
 
   const [searchInput, setSearchInput] = useState(
@@ -97,19 +99,25 @@ const ProductFilters = (): JSX.Element => {
 
   const hasActiveFilters = searchInput || currentCategory || currentSort;
 
+  const sortByTypes = [
+    { value: "none", label: t("products:sortByNone") },
+    { value: "title", label: t("products:sortByTitle") },
+    { value: "price", label: t("products:sortByPrice") },
+  ];
+
   return (
     <div className="mb-6 space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {/* Search Input */}
         <div className="md:col-span-2 space-y-2">
-          <Label htmlFor="search">Search Products</Label>
+          <Label htmlFor="search">{t("products:searchProducts")}</Label>
           <div className="flex gap-2">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 id="search"
                 type="text"
-                placeholder="Search by title or description..."
+                placeholder={t("products:searchProductsPlaceholder")}
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
@@ -118,14 +126,14 @@ const ProductFilters = (): JSX.Element => {
             </div>
             <Button onClick={handleSearch} className="shrink-0">
               <Search className="h-4 w-4 mr-2" />
-              Search
+              {t("commons:search")}
             </Button>
           </div>
         </div>
 
         {/* Category Filter */}
         <div className="space-y-2">
-          <Label htmlFor="category">Category</Label>
+          <Label htmlFor="category">{t("products:category")}</Label>
           <Select
             value={currentCategory || "all"}
             onValueChange={handleCategoryChange}
@@ -135,7 +143,7 @@ const ProductFilters = (): JSX.Element => {
               <SelectValue placeholder="All Categories" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Categories</SelectItem>
+              <SelectItem value="all">{t("products:allCategories")}</SelectItem>
               {categories.map((category) => (
                 <SelectItem key={category.value} value={category.value}>
                   {category.label}
@@ -147,19 +155,21 @@ const ProductFilters = (): JSX.Element => {
 
         {/* Sort By */}
         <div className="space-y-2">
-          <Label htmlFor="sort">Sort By</Label>
+          <Label htmlFor="sort">{t("products:sortBy")}</Label>
           <div className="flex gap-2">
             <Select
               value={currentSort || "none"}
               onValueChange={handleSortChange}
             >
               <SelectTrigger id="sort" className="flex-1">
-                <SelectValue placeholder="None" />
+                <SelectValue placeholder={t("products:sortByNone")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="none">None</SelectItem>
-                <SelectItem value="title">Title</SelectItem>
-                <SelectItem value="price">Price</SelectItem>
+                {sortByTypes.map((type) => (
+                  <SelectItem key={type.value} value={type.value}>
+                    {type.label}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
             {currentSort && (
@@ -183,20 +193,24 @@ const ProductFilters = (): JSX.Element => {
       {hasActiveFilters && (
         <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-sm font-medium">Active Filters:</span>
+            <span className="text-sm font-medium">
+              {t("products:activeFilters")}:
+            </span>
             {searchInput && (
               <span className="text-sm bg-background px-2 py-1 rounded">
-                Search: {searchInput}
+                {t("commons:search")}: {searchInput}
               </span>
             )}
             {currentCategory && (
               <span className="text-sm bg-background px-2 py-1 rounded">
-                Category: {currentCategory}
+                {t("products:category")}: {currentCategory}
               </span>
             )}
             {currentSort && (
               <span className="text-sm bg-background px-2 py-1 rounded">
-                Sort: {currentSort} ({currentOrder})
+                {t("commons:sort")}:{" "}
+                {sortByTypes.find((type) => type.value === currentSort)?.label}{" "}
+                ({currentOrder})
               </span>
             )}
           </div>
@@ -207,7 +221,7 @@ const ProductFilters = (): JSX.Element => {
             className="shrink-0"
           >
             <X className="h-4 w-4 mr-2" />
-            Clear All
+            {t("commons:clearAll")}
           </Button>
         </div>
       )}

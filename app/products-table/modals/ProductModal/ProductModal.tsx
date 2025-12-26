@@ -187,7 +187,7 @@ const ProductModal = ({
         {mode === "create" ? (
           <Button>
             <Plus className="h-4 w-4 mr-2" />
-            Add Product
+            {t("products:addProduct")}
           </Button>
         ) : (
           <Button
@@ -223,7 +223,7 @@ const ProductModal = ({
               id="title"
               type="text"
               {...register("title")}
-              placeholder="Enter product title"
+              placeholder={t("products:titlePlaceholder")}
               className="w-full"
             />
             {errors.title && (
@@ -241,7 +241,7 @@ const ProductModal = ({
             <Textarea
               id="description"
               {...register("description")}
-              placeholder="Enter product description"
+              placeholder={t("products:descriptionPlaceholder")}
               className="w-full min-h-[100px] resize-none"
             />
             {errors.description && (
@@ -266,7 +266,7 @@ const ProductModal = ({
                   disabled={categoriesLoading}
                 >
                   <SelectTrigger id="category">
-                    <SelectValue placeholder="Select a category" />
+                    <SelectValue placeholder={t("products:selectCategory")} />
                   </SelectTrigger>
                   <SelectContent>
                     {categories.map((category) => (
@@ -311,7 +311,7 @@ const ProductModal = ({
                 htmlFor="discountPercentage"
                 className="text-sm font-medium"
               >
-                Discount (%)
+                {t("products:discount")} (%)
               </Label>
               <Input
                 id="discountPercentage"
@@ -333,7 +333,9 @@ const ProductModal = ({
 
           {/* Multiple Image URLs */}
           <div className="space-y-2">
-            <Label className="text-sm font-medium">Product Images *</Label>
+            <Label className="text-sm font-medium">
+              {t("products:productImages")} *
+            </Label>
             <div className="space-y-3">
               {imageUrls.map((url, index) => (
                 <div key={index} className="flex gap-2">
@@ -364,7 +366,7 @@ const ProductModal = ({
                 className="w-full"
               >
                 <Plus className="h-4 w-4 mr-2" />
-                Add Another Image
+                {t("products:addAnotherImage")}
               </Button>
             </div>
             {errors.images && (
@@ -381,7 +383,7 @@ const ProductModal = ({
             variant="outline"
             onClick={() => setOpen(false)}
           >
-            Cancel
+            {t("commons:cancel")}
           </Button>
           <Button
             type="submit"
@@ -389,7 +391,9 @@ const ProductModal = ({
             onClick={handleSubmit(onSubmit)}
             className="bg-green-600 hover:bg-green-700"
           >
-            {mode === "edit" ? "Update Product" : "Create Product"}
+            {mode === "edit"
+              ? t("products:updateProduct")
+              : t("products:createProduct")}
           </Button>
         </DialogFooter>
       </DialogContent>

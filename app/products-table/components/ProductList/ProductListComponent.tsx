@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import useTranslationHook from "@/i18n/useTranslation.hook";
 import { formatCategory } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
@@ -29,6 +30,7 @@ import ProductFilters from "./components/ProductFilters";
  * @returns {JSX.Element} A JSX element representing the table component.
  */
 const ProductListComponent = (): JSX.Element => {
+  const { t } = useTranslationHook();
   const { productsData, isShowLoading } = useQueryProductsHook();
 
   const products = useMemo(
@@ -45,7 +47,7 @@ const ProductListComponent = (): JSX.Element => {
               <div className="flex items-center justify-center gap-2">
                 <Loader2 className="h-5 w-5 animate-spin" />
                 <span className="text-muted-foreground">
-                  Loading products...
+                  {t("products:loadingProducts")}
                 </span>
               </div>
             </TableCell>
@@ -60,10 +62,10 @@ const ProductListComponent = (): JSX.Element => {
             <TableCell colSpan={12} className="text-center py-12">
               <div className="flex flex-col items-center gap-2">
                 <span className="text-lg text-muted-foreground">
-                  No products found
+                  {t("products:noProductsFound")}
                 </span>
                 <span className="text-sm text-muted-foreground">
-                  Try adding a new product to get started
+                  {t("products:noProductsFoundDescription")}
                 </span>
               </div>
             </TableCell>
@@ -156,7 +158,7 @@ const ProductListComponent = (): JSX.Element => {
         ))}
       </TableBody>
     );
-  }, [isShowLoading, products]);
+  }, [isShowLoading, products, t]);
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
@@ -174,31 +176,31 @@ const ProductListComponent = (): JSX.Element => {
             <TableHeader>
               <TableRow>
                 <TableHead className="text-center font-semibold w-20">
-                  Product ID
+                  {t("products:productId")}
                 </TableHead>
                 <TableHead className="text-center font-semibold w-40">
-                  Image
+                  {t("products:image")}
                 </TableHead>
                 <TableHead className="text-center font-semibold w-40">
-                  Title
+                  {t("products:title")}
                 </TableHead>
                 <TableHead className="text-center font-semibold w-60">
-                  Description
+                  {t("products:description")}
                 </TableHead>
                 <TableHead className="text-center font-semibold w-40">
-                  Category
+                  {t("products:category")}
                 </TableHead>
                 <TableHead className="text-center font-semibold w-32">
-                  Price
+                  {t("products:price")}
                 </TableHead>
                 <TableHead className="text-center font-semibold w-40">
-                  Created at
+                  {t("products:createdAt")}
                 </TableHead>
                 <TableHead className="text-center font-semibold w-40">
-                  Updated at
+                  {t("products:updatedAt")}
                 </TableHead>
                 <TableHead className="text-center font-semibold w-60">
-                  Actions
+                  {t("products:actions")}
                 </TableHead>
               </TableRow>
             </TableHeader>

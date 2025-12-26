@@ -1,13 +1,29 @@
+import useTranslationHook from "@/i18n/useTranslation.hook";
 import Image from "next/image";
 import Link from "next/link";
 import { ProductGridProps } from "../type";
 
+/**
+ * A component that renders a grid of products.
+ *
+ * The component takes a title, description, an array of products, and a limit as props.
+ * The title and description are displayed above the grid of products.
+ * The products are rendered as a grid with a maximum of 3 columns on large screens and 2 columns on small to medium screens.
+ * Each product is rendered as a link to the product detail page, with an image, title, rating, and price.
+ * If the product has a discount, the discounted price is displayed, along with the original price struck through.
+ * If the product is out of stock, an "Out of Stock" label is displayed on top of the product image.
+ *
+ * @param {ProductGridProps} props - The props for the component.
+ * @returns {JSX.Element} A JSX element representing the component.
+ */
+
 export function ProductGridComponent({
-  title = "Featured Products",
-  description = "Handpicked favorites from our collection",
+  title = "",
+  description = "",
   products = [],
   limit = 6,
 }: Readonly<ProductGridProps>) {
+  const { t } = useTranslationHook();
   return (
     <section
       id="products"
@@ -16,9 +32,11 @@ export function ProductGridComponent({
       <div className="flex items-end justify-between mb-12">
         <div>
           <h2 className="text-2xl sm:text-3xl font-medium text-foreground">
-            {title}
+            {title || t("products:featuredProducts")}
           </h2>
-          <p className="mt-2 text-muted-foreground">{description}</p>
+          <p className="mt-2 text-muted-foreground">
+            {description || t("products:featuredProductsDescription")}
+          </p>
         </div>
       </div>
 

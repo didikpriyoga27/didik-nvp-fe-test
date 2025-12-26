@@ -7,6 +7,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import useTranslationHook from "@/i18n/useTranslation.hook";
+import { useSearchParams } from "next/navigation";
 import useQueryProductsHook from "../../hooks/useQueryProducts.hook";
 
 /**
@@ -22,10 +24,12 @@ import useQueryProductsHook from "../../hooks/useQueryProducts.hook";
  * The buttons update the URL query string to reflect the selected page number.
  */
 function ProductPaginationComponent() {
+  const { t } = useTranslationHook();
   const { productsData, page, setPage } = useQueryProductsHook();
+  const searchParams = useSearchParams();
 
   const total = productsData?.total || 0;
-  const limit = productsData?.limit || 10;
+  const limit = Number(searchParams.get("limit") ?? 10);
   const maxPage = Math.ceil(total / limit);
 
   const currentPage = page || 1;
@@ -50,7 +54,6 @@ function ProductPaginationComponent() {
       // Show pages around current page
       const start = Math.max(2, currentPage - 1);
       const end = Math.min(maxPage - 1, currentPage + 1);
-
       for (let i = start; i <= end; i++) {
         pages.push(i);
       }
@@ -77,6 +80,7 @@ function ProductPaginationComponent() {
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
+            text={t("commons:previous")}
             onClick={() => currentPage > 1 && setPage(currentPage - 1)}
             className={
               currentPage <= 1
@@ -106,6 +110,7 @@ function ProductPaginationComponent() {
 
         <PaginationItem>
           <PaginationNext
+            text={t("commons:next")}
             onClick={() => currentPage < maxPage && setPage(currentPage + 1)}
             className={
               currentPage >= maxPage
