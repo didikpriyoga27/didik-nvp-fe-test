@@ -83,7 +83,7 @@ const ProductListComponent = (): JSX.Element => {
             </TableCell>
             <TableCell className="text-center">
               <Link
-                href={`/product/${product.id}`}
+                href={`/products/${product.id}`}
                 className="w-40 justify-center"
               >
                 <Image

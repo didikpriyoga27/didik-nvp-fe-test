@@ -1,4 +1,4 @@
-import { Product } from "@/components/sections/product-grid";
+import { Product } from "../products/type";
 
 export interface Column extends Product {
   actions?: string;

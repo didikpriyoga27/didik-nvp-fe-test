@@ -1,4 +1,4 @@
-import { Product } from "@/components/sections/product-grid";
+import { Product } from "@/app/products/type";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -196,7 +196,7 @@ const ProductModal = ({
             className="h-9 w-9 bg-blue-600 hover:bg-blue-700"
             aria-label="Edit product"
           >
-            <Pencil className="h-4 w-4" />
+            <Pencil className="h-4 w-4 text-white" />
           </Button>
         )}
       </DialogTrigger>

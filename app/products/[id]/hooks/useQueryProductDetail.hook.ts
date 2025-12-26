@@ -1,6 +1,6 @@
-import { Product } from "@/components/sections/product-grid";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { Product } from "../../type";
 
 /**
  * A hook for fetching a single product's details by ID.

@@ -1,54 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ProductGridProps } from "../type";
 
-export type Product = {
-  id: number;
-  title: string;
-  description: string;
-  category: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  tags: string[];
-  brand: string;
-  sku: string;
-  weight: number;
-  dimensions: {
-    width: number;
-    height: number;
-    depth: number;
-  };
-  warrantyInformation: string;
-  shippingInformation: string;
-  availabilityStatus: string;
-  reviews: {
-    rating: number;
-    comment: string;
-    date: string;
-    reviewerName: string;
-    reviewerEmail: string;
-  }[];
-  returnPolicy: string;
-  minimumOrderQuantity: number;
-  meta: {
-    createdAt: string;
-    updatedAt: string;
-    barcode: string;
-    qrCode: string;
-  };
-  images: string[];
-  thumbnail: string;
-};
-
-type ProductGridProps = {
-  title?: string;
-  description?: string;
-  products?: Product[];
-  limit?: number;
-};
-
-export function ProductGrid({
+export function ProductGridComponent({
   title = "Featured Products",
   description = "Handpicked favorites from our collection",
   products = [],
@@ -57,7 +11,7 @@ export function ProductGrid({
   return (
     <section
       id="products"
-      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24"
+      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16"
     >
       <div className="flex items-end justify-between mb-12">
         <div>
@@ -80,7 +34,7 @@ export function ProductGrid({
           return (
             <Link
               key={product.id}
-              href={`/product/${product.id}`}
+              href={`/products/${product.id}`}
               className="group"
             >
               <div className="relative aspect-square bg-secondary rounded-2xl overflow-hidden mb-4">

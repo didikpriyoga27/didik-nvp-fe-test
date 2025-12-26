@@ -8,6 +8,7 @@ import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import { PropsWithChildren, Suspense } from "react";
+import { LanguageButton } from "./language-button";
 import { ThemeButton } from "./theme-button";
 
 const geistSans = Geist({
@@ -38,7 +39,8 @@ async function AppWrapper({ children }: Readonly<PropsWithChildren>) {
               <Navbar />
             </div>
             <Suspense>
-              <div className="justify-end flex-row gap-4">
+              <div>
+                <LanguageButton />
                 <ThemeButton />
               </div>
             </Suspense>

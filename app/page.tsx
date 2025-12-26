@@ -1,9 +1,9 @@
 "use client";
 
 import { Hero } from "@/components/sections/hero";
-import { ProductGrid } from "@/components/sections/product-grid";
 import { Suspense } from "react";
 import useQueryProductsHook from "./products-table/hooks/useQueryProducts.hook";
+import { ProductGridComponent } from "./products/components/ProductGridComponent";
 
 export function ProductGridSkeleton() {
   return (
@@ -36,7 +36,7 @@ export default function Home() {
     <main>
       <Hero />
       <Suspense fallback={<ProductGridSkeleton />}>
-        <ProductGrid products={productsData?.products} limit={30} />
+        <ProductGridComponent products={productsData?.products} limit={30} />
       </Suspense>
     </main>
   );

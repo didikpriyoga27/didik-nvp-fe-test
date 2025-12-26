@@ -1,6 +1,6 @@
 "use client";
 
-import { Product } from "@/components/sections/product-grid";
+import { Product } from "@/app/products/type";
 import useQueryStringHook from "@/hooks/useQueryString.hook";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import axios from "axios";

@@ -63,7 +63,7 @@ const ProductDetailPage = () => {
               <p className="text-muted-foreground">
                 {`The product you're looking for doesn't exist or has been removed.`}
               </p>
-              <Button onClick={() => router.push("/products-table")}>
+              <Button onClick={() => router.back()}>
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back to Products
               </Button>

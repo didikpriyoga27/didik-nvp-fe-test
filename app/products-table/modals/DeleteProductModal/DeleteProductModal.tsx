@@ -46,7 +46,8 @@ const DeleteProductModal = ({
 
   const handleDeleteOnClick = useCallback(() => {
     mutateDeleteProduct(productId)
-      .then(() => {
+      .then((res) => {
+        console.log(res.data);
         queryClient.invalidateQueries({ queryKey: ["products"] });
         setOpen(false);
         successMessage(t("products:successDeletedProduct"));
@@ -73,7 +74,7 @@ const DeleteProductModal = ({
           className="h-9 w-9"
           aria-label="Delete product"
         >
-          <Trash2 className="h-4 w-4" />
+          <Trash2 className="h-4 w-4 text-white" />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -84,14 +85,14 @@ const DeleteProductModal = ({
             <span className="font-semibold text-foreground">
               {productTitle}
             </span>
-            ? This action cannot be undone.
+            {""}? This action cannot be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             onClick={handleDeleteOnClick}
-            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            className="bg-destructive text-white hover:bg-destructive/90"
           >
             Delete
           </AlertDialogAction>

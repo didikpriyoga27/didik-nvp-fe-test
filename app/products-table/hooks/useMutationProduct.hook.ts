@@ -1,4 +1,4 @@
-import { Product } from "@/components/sections/product-grid";
+import { Product } from "@/app/products/type";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useCallback } from "react";

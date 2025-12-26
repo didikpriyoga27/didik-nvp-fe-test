@@ -1,4 +1,3 @@
-import { Option } from "@/components/atoms/Select/type";
 import { formatCategory } from "@/lib/utils";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -31,7 +30,7 @@ const useQueryCategoriesHook = () => {
     placeholderData: keepPreviousData,
   });
 
-  const categoryOptions: Option[] =
+  const categoryOptions: { label: string; value: string }[] =
     categoriesData?.map((category) => ({
       value: category,
       label: formatCategory(category),
