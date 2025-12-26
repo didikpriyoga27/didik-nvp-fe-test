@@ -163,7 +163,9 @@ const ProductListComponent = (): JSX.Element => {
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-foreground">Products</h1>
+        <h1 className="text-3xl font-bold text-foreground">
+          {t("products:products")}
+        </h1>
         <ProductModal mode="create" />
       </div>
 
