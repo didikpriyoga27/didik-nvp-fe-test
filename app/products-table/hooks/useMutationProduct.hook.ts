@@ -40,22 +40,32 @@ const useMutationProductHook = () => {
     [baseUrl]
   );
 
-  const { mutateAsync: mutateCreateProduct } = useMutation({
-    mutationKey: ["createProduct"],
-    mutationFn: createProduct,
-  });
+  const { mutateAsync: mutateCreateProduct, isPending: isCreatePending } =
+    useMutation({
+      mutationKey: ["createProduct"],
+      mutationFn: createProduct,
+    });
 
-  const { mutateAsync: mutateUpdateProduct } = useMutation({
-    mutationKey: ["updateProduct"],
-    mutationFn: updateProduct,
-  });
+  const { mutateAsync: mutateUpdateProduct, isPending: isUpdatePending } =
+    useMutation({
+      mutationKey: ["updateProduct"],
+      mutationFn: updateProduct,
+    });
 
-  const { mutateAsync: mutateDeleteProduct } = useMutation({
-    mutationKey: ["deleteProduct"],
-    mutationFn: deleteProduct,
-  });
+  const { mutateAsync: mutateDeleteProduct, isPending: isDeletePending } =
+    useMutation({
+      mutationKey: ["deleteProduct"],
+      mutationFn: deleteProduct,
+    });
 
-  return { mutateCreateProduct, mutateUpdateProduct, mutateDeleteProduct };
+  return {
+    isCreatePending,
+    isUpdatePending,
+    isDeletePending,
+    mutateCreateProduct,
+    mutateUpdateProduct,
+    mutateDeleteProduct,
+  };
 };
 
 export default useMutationProductHook;

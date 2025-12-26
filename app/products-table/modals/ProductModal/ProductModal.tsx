@@ -21,14 +21,16 @@ import { Textarea } from "@/components/ui/textarea";
 import useToastHook from "@/hooks/useToast.hook";
 import useTranslationHook from "@/i18n/useTranslation.hook";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Pencil, Plus, X } from "lucide-react";
+import { Loader2, Pencil, Plus, X } from "lucide-react";
 import { JSX, useCallback, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { z } from "zod";
 import useMutationProductHook from "../../hooks/useMutationProduct.hook";
 import useQueryCategoriesHook from "../../hooks/useQueryCategories.hook";
 import useQueryProductsHook from "../../hooks/useQueryProducts.hook";
-import productSchema, { ProductFormData } from "../../schemas/product.schema";
+import {
+  default as createProductSchema,
+  ProductFormData,
+} from "../../schemas/product.schema";
 
 interface IProductModalProps {
   selectedProduct?: Product;
@@ -56,6 +58,8 @@ const ProductModal = ({
   const [imageUrls, setImageUrls] = useState<string[]>(
     selectedProduct?.images || [""]
   );
+  const { t } = useTranslationHook();
+  const schema = createProductSchema(t);
 
   const {
     register,
@@ -65,8 +69,8 @@ const ProductModal = ({
     control,
     setValue,
   } = useForm<ProductFormData>({
-    //@ts-expect-error not error
-    resolver: zodResolver(productSchema),
+    //@ts-expect-error valid
+    resolver: zodResolver(schema),
     defaultValues: selectedProduct
       ? {
           title: selectedProduct.title,
@@ -86,15 +90,19 @@ const ProductModal = ({
         },
   });
 
-  const { t } = useTranslationHook();
-  const { mutateCreateProduct, mutateUpdateProduct } = useMutationProductHook();
+  const {
+    isCreatePending,
+    isUpdatePending,
+    mutateCreateProduct,
+    mutateUpdateProduct,
+  } = useMutationProductHook();
   const { refetch } = useQueryProductsHook();
   const { categoryOptions: categories, isLoading: categoriesLoading } =
     useQueryCategoriesHook();
   const { successMessage, errorMessage } = useToastHook();
 
   const handleUpdateProduct = useCallback(
-    (dataSubmit: z.infer<typeof productSchema>) => {
+    (dataSubmit: ProductFormData) => {
       mutateUpdateProduct({ data: dataSubmit, id: selectedProduct!.id })
         .then((res) => {
           console.log(res.data);
@@ -120,7 +128,7 @@ const ProductModal = ({
   );
 
   const handleCreateProduct = useCallback(
-    (dataSubmit: z.infer<typeof productSchema>) => {
+    (dataSubmit: ProductFormData) => {
       mutateCreateProduct(dataSubmit)
         .then((res) => {
           console.log(res.data);
@@ -139,7 +147,7 @@ const ProductModal = ({
   );
 
   const onSubmit = useCallback(
-    (data: z.infer<typeof productSchema>) => {
+    (data: ProductFormData) => {
       // Filter out empty image URLs
       const validImages = imageUrls.filter((url) => url.trim() !== "");
       const dataSubmit = {
@@ -358,6 +366,11 @@ const ProductModal = ({
                   )}
                 </div>
               ))}
+              {errors.images && (
+                <p className="text-sm text-destructive">
+                  {errors.images?.[0]?.message as string}
+                </p>
+              )}
               <Button
                 type="button"
                 variant="outline"
@@ -369,11 +382,6 @@ const ProductModal = ({
                 {t("products:addAnotherImage")}
               </Button>
             </div>
-            {errors.images && (
-              <p className="text-sm text-destructive">
-                {errors.images.message as string}
-              </p>
-            )}
           </div>
         </form>
 
@@ -390,10 +398,19 @@ const ProductModal = ({
             //@ts-expect-error not error
             onClick={handleSubmit(onSubmit)}
             className="bg-green-600 hover:bg-green-700"
+            disabled={isCreatePending}
           >
-            {mode === "edit"
-              ? t("products:updateProduct")
-              : t("products:createProduct")}
+            {isCreatePending ||
+              (isUpdatePending && (
+                <div className="flex items-center justify-center">
+                  <Loader2 className="animate-spin h-6 w-6" />
+                </div>
+              ))}
+            <div>
+              {mode === "edit"
+                ? t("products:updateProduct")
+                : t("products:createProduct")}
+            </div>
           </Button>
         </DialogFooter>
       </DialogContent>
