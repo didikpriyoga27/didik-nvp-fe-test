@@ -1,1 +1,1 @@
-export { default as ProductPagination } from "./ProductPagination.component";
+export { default as ProductPagination } from "./ProductPaginationComponent";
