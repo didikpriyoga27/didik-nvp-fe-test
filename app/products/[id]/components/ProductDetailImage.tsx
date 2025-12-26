@@ -1,4 +1,4 @@
-import { Badge } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { useState } from "react";
 import { Product } from "../../type";

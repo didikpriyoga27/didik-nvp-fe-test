@@ -1,13 +1,15 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import useTranslationHook from "@/i18n/useTranslation.hook";
 import { ArrowLeft } from "lucide-react";
-import router from "next/router";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 /**
  * A component that renders a header for a product detail page.
  * It includes a button to go back to the previous page.
  */
-const ProductDetailHeader = () => {
+const ProductDetailHeader = ({ router }: { router: AppRouterInstance }) => {
   const { t } = useTranslationHook();
   return (
     <div className="border-b">
