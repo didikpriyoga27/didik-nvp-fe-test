@@ -1,5 +1,4 @@
 import { Footer } from "@/app/footer";
-//@ts-expect-error valid import
 import "@/app/globals.css";
 import { Navbar } from "@/app/navbar";
 import { TanstackQueryProvider, ToastProvider } from "@/providers";
