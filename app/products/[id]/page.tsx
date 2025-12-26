@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useToastHook from "@/hooks/useToast.hook";
+import useTranslationHook from "@/i18n/useTranslation.hook";
 import { formatCategory } from "@/lib/utils";
 import {
   ArrowLeft,
@@ -37,6 +38,7 @@ const ProductDetailPage = () => {
   const router = useRouter();
   const productId = params?.id as string;
 
+  const { t } = useTranslationHook();
   const { product, isLoading, error } = useQueryProductDetailHook(productId);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -47,7 +49,9 @@ const ProductDetailPage = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
-          <p className="text-muted-foreground">Loading product details...</p>
+          <p className="text-muted-foreground">
+            {t("products:loadingProductDetails")}
+          </p>
         </div>
       </div>
     );
@@ -59,13 +63,15 @@ const ProductDetailPage = () => {
         <Card className="max-w-md w-full mx-4">
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
-              <h2 className="text-2xl font-bold">Product Not Found</h2>
+              <h2 className="text-2xl font-bold">
+                {t("products:productNotFound")}
+              </h2>
               <p className="text-muted-foreground">
                 {`The product you're looking for doesn't exist or has been removed.`}
               </p>
               <Button onClick={() => router.back()}>
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Products
+                {t("products:backToProducts")}
               </Button>
             </div>
           </CardContent>
@@ -94,7 +100,7 @@ const ProductDetailPage = () => {
             className="gap-2"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back
+            {t("commons:back")}
           </Button>
         </div>
       </div>
@@ -255,7 +261,7 @@ const ProductDetailPage = () => {
                 onClick={handleAddToCart}
               >
                 <ShoppingCart className="h-5 w-5 mr-2" />
-                Add to Cart
+                {t("products:addToCart")}
               </Button>
             </div>
 
@@ -266,7 +272,9 @@ const ProductDetailPage = () => {
                   <div className="flex items-start gap-3">
                     <Truck className="h-5 w-5 text-primary shrink-0" />
                     <div>
-                      <p className="font-medium text-sm">Shipping</p>
+                      <p className="font-medium text-sm">
+                        {t("products:shipping")}
+                      </p>
                       <p className="text-xs text-muted-foreground mt-1">
                         {product.shippingInformation}
                       </p>
@@ -280,7 +288,9 @@ const ProductDetailPage = () => {
                   <div className="flex items-start gap-3">
                     <RefreshCw className="h-5 w-5 text-primary shrink-0" />
                     <div>
-                      <p className="font-medium text-sm">Returns</p>
+                      <p className="font-medium text-sm">
+                        {t("products:return")}
+                      </p>
                       <p className="text-xs text-muted-foreground mt-1">
                         {product.returnPolicy}
                       </p>
@@ -294,7 +304,9 @@ const ProductDetailPage = () => {
                   <div className="flex items-start gap-3">
                     <Shield className="h-5 w-5 text-primary shrink-0" />
                     <div>
-                      <p className="font-medium text-sm">Warranty</p>
+                      <p className="font-medium text-sm">
+                        {t("products:warranty")}
+                      </p>
                       <p className="text-xs text-muted-foreground mt-1">
                         {product.warrantyInformation}
                       </p>
@@ -310,10 +322,14 @@ const ProductDetailPage = () => {
         <div className="mt-16">
           <Tabs defaultValue="description" className="w-full">
             <TabsList className="w-full justify-start">
-              <TabsTrigger value="description">Description</TabsTrigger>
-              <TabsTrigger value="specifications">Specifications</TabsTrigger>
+              <TabsTrigger value="description">
+                {t("products:description")}
+              </TabsTrigger>
+              <TabsTrigger value="specifications">
+                {t("products:specification")}
+              </TabsTrigger>
               <TabsTrigger value="reviews">
-                Reviews ({product.reviews?.length || 0})
+                {t("products:reviews")} ({product.reviews?.length || 0})
               </TabsTrigger>
             </TabsList>
 
@@ -353,7 +369,7 @@ const ProductDetailPage = () => {
                     </div>
                     <div>
                       <dt className="text-sm font-medium text-muted-foreground">
-                        Weight
+                        {t("products:weight")}
                       </dt>
                       <dd className="mt-1 text-sm text-foreground">
                         {product.weight} kg
@@ -361,7 +377,7 @@ const ProductDetailPage = () => {
                     </div>
                     <div>
                       <dt className="text-sm font-medium text-muted-foreground">
-                        Dimensions
+                        {t("products:dimensions")}
                       </dt>
                       <dd className="mt-1 text-sm text-foreground">
                         {product.dimensions.width} × {product.dimensions.height}{" "}
