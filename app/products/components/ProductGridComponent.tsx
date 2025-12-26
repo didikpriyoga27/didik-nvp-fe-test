@@ -73,7 +73,7 @@ export function ProductGridComponent({
                 {product.stock === 0 && (
                   <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
                     <span className="text-white font-semibold text-lg">
-                      Out of Stock
+                      {t("products:outOfStock")}
                     </span>
                   </div>
                 )}
@@ -83,7 +83,7 @@ export function ProductGridComponent({
                   <h3 className="text-base font-medium text-foreground line-clamp-2 flex-1">
                     {product.title}
                   </h3>
-                  {product.rating && (
+                  {!!product.rating && (
                     <div className="flex items-center gap-1 text-sm shrink-0">
                       <span className="text-yellow-500">★</span>
                       <span className="text-foreground font-medium">

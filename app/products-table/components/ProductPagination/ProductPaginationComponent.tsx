@@ -92,7 +92,7 @@ function ProductPaginationComponent() {
 
         {pageNumbers.map((pageNum, index) =>
           pageNum === "ellipsis" ? (
-            <PaginationItem key={`ellipsis-${index}`}>
+            <PaginationItem key={pageNum + index}>
               <PaginationEllipsis />
             </PaginationItem>
           ) : (

@@ -60,7 +60,7 @@ const ProductDetailInformation = ({
       {/* Rating */}
       <div className="flex items-center gap-2">
         <div className="flex items-center">
-          {[...Array(5)].map((_, i) => (
+          {[...new Array(5)].map((_, i) => (
             <Star
               key={i}
               className={`h-5 w-5 ${
@@ -109,7 +109,7 @@ const ProductDetailInformation = ({
       {/* Quantity and Add to Cart */}
       <div className="space-y-4">
         <div className="flex items-center gap-4">
-          <label className="text-sm font-medium">Quantity:</label>
+          <div className="text-sm font-medium">Quantity:</div>
           <div className="flex items-center border rounded-lg">
             <Button
               variant="ghost"

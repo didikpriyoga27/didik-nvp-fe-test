@@ -27,8 +27,7 @@ import { Controller, useForm } from "react-hook-form";
 import useMutationProductHook from "../../hooks/useMutationProduct.hook";
 import useQueryCategoriesHook from "../../hooks/useQueryCategories.hook";
 import useQueryProductsHook from "../../hooks/useQueryProducts.hook";
-import {
-  default as createProductSchema,
+import createProductSchema, {
   ProductFormData,
 } from "../../schemas/product.schema";
 
@@ -250,7 +249,7 @@ const ProductModal = ({
               id="description"
               {...register("description")}
               placeholder={t("products:descriptionPlaceholder")}
-              className="w-full min-h-[100px] resize-none"
+              className="w-full min-h-25 resize-none"
             />
             {errors.description && (
               <p className="text-sm text-destructive">
@@ -346,7 +345,7 @@ const ProductModal = ({
             </Label>
             <div className="space-y-3">
               {imageUrls.map((url, index) => (
-                <div key={index} className="flex gap-2">
+                <div key={url} className="flex gap-2">
                   <Input
                     type="url"
                     value={url}

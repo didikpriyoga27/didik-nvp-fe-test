@@ -54,6 +54,7 @@ const products: Record<TProductsKeys, string> = {
   loadingProducts: "Memuat Produk...",
   noProductsFound: "Produk tidak ditemukan",
   noProductsFoundDescription: "Silakan tambahkan produk baru untuk memulai",
+  outOfStock: "Stok Habis",
   price: "Harga",
   priceIsRequired: "Harga harus diisi",
   priceMustBeGreaterThanZero: "Harga harus lebih besar dari 0",

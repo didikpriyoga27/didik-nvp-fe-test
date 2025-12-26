@@ -35,7 +35,7 @@ export function Hero() {
         </div>
       </div>
       {/* Subtle decorative element */}
-      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-1/3 h-full bg-gradient-to-l from-secondary/50 to-transparent pointer-events-none hidden lg:block" />
+      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-1/3 h-full bg-linear-to-l from-secondary/50 to-transparent pointer-events-none hidden lg:block" />
     </section>
   );
 }

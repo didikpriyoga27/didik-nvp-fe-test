@@ -52,6 +52,7 @@ const products = {
   loadingProducts: "Loading products...",
   noProductsFound: "No products found",
   noProductsFoundDescription: "Try adding a new product to get started",
+  outOfStock: "Out of Stock",
   price: "Price",
   priceIsRequired: "Price is required",
   priceMustBeGreaterThanZero: "Price must be greater than 0",
