@@ -23,6 +23,7 @@ const products = {
   addToCart: "Add to Cart",
   allCategories: "All Categories",
   backToProducts: "Back to Products",
+  barcode: "Barcode",
   category: "Category",
   categoryIsRequired: "Category is required",
   createdAt: "Created at",
@@ -36,6 +37,7 @@ const products = {
   discountPercentageMustBeBetweenZeroAndHundred:
     "Discount percentage must be between 0 and 100",
   editProduct: "Edit Product",
+  emptyReview: "No reviews yet",
   errorAddedToCart: "Failed to add to cart",
   errorCreatedProduct: "Failed to create product",
   errorDeletedProduct: "Failed to delete product",
@@ -56,6 +58,8 @@ const products = {
   productId: "ID",
   productImages: "Product Images",
   productNotFound: "Product Not Found",
+  productNotFoundDescription:
+    "The product you're looking for doesn't exist or has been removed.",
   products: "Products",
   return: "Return",
   reviews: "Reviews",
@@ -63,6 +67,7 @@ const products = {
   searchProductsPlaceholder: "Search by title or description",
   selectCategory: "Select a category",
   shipping: "Shipping",
+  sku: "SKU",
   sortBy: "Sort By",
   sortByNone: "None",
   sortByPrice: "Price",

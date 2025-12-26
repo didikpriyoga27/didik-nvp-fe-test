@@ -25,6 +25,7 @@ const products: Record<TProductsKeys, string> = {
   addToCart: "Tambah ke Keranjang",
   allCategories: "Semua Kategori",
   backToProducts: "Kembali ke Produk",
+  barcode: "Barcode",
   category: "Kategori",
   categoryIsRequired: "Kategori harus diisi",
   createdAt: "Dibuat",
@@ -38,6 +39,7 @@ const products: Record<TProductsKeys, string> = {
   discountPercentageMustBeBetweenZeroAndHundred:
     "Persentase diskon harus antara 0 dan 100",
   editProduct: "Edit Produk",
+  emptyReview: "Belum ada ulasan",
   errorAddedToCart: "Gagal menambahkan ke keranjang",
   errorCreatedProduct: "Gagal membuat produk",
   errorDeletedProduct: "Gagal menghapus produk",
@@ -58,6 +60,8 @@ const products: Record<TProductsKeys, string> = {
   productId: "ID",
   productImages: "Gambar Produk",
   productNotFound: "Produk Tidak Ditemukan",
+  productNotFoundDescription:
+    "Produk yang Anda cari tidak ada atau telah dihapus.",
   products: "Produk",
   return: "Pengembalian",
   reviews: "Ulasan",
@@ -65,6 +69,7 @@ const products: Record<TProductsKeys, string> = {
   searchProductsPlaceholder: "Cari berdasarkan judul atau deskripsi",
   selectCategory: "Pilih Kategori",
   shipping: "Pengiriman",
+  sku: "SKU",
   sortBy: "Urutkan Berdasarkan",
   sortByNone: "Tidak Ada",
   sortByPrice: "Harga",
